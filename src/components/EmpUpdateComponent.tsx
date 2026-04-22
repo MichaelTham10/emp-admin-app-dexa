@@ -17,14 +17,15 @@ export const EmpUpdateComponent = ({
     });
 
 
-    const { mutate: updateProfile, error, isPending } = useMutation<ResponseEmpProfile, Error, RequestUpdateEmployeeModel>({
+    const { mutate: updateProfile, isPending } = useMutation<ResponseEmpProfile, Error, RequestUpdateEmployeeModel>({
         mutationFn: async (payload) => {
             const { data } = await empApi.patch<ResponseEmpProfile>(`${UpdateEmployeeByIdUrl}/${empId}`, payload)
             return data
         },
         onSuccess: (data) => {
             console.log(data);
-            window.location.reload()
+            alert("Success update Data");
+            window.location.reload();
         },
     })
 
@@ -34,7 +35,7 @@ export const EmpUpdateComponent = ({
             password: formData.password,
             phoneNumber: formData.phone,
             photo: "AWS_URL_OR_LOCAL_PATH",
-            photoSize: formData.photo!.size
+            ...(formData.photo && { photoSize: formData.photo.size }),
         });
     }
 
@@ -42,10 +43,10 @@ export const EmpUpdateComponent = ({
     return (
         <div className="flex-1">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 h-full">
-                <h2 className="text-2xl font-bold mb-8 text-gray-800">Edit Profil</h2>
+                <h2 className="text-2xl font-bold mb-8 text-gray-800">Edit Profile</h2>
                 <form className="max-w-md space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Foto Profil</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Foto Profile</label>
                         <input onChange={(input) => setFormData((prev) => ({
                             ...prev,
                             photo: input.target.files?.[0] || null

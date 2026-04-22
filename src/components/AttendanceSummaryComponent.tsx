@@ -118,7 +118,7 @@ export const AttendanceSummaryComponent = ({
 
         <div className="flex justify-between mt-4">
           <p>
-            {Math.min(indexOfLastItem, list.length)} dari {list.length}
+            {Math.min(indexOfLastItem, list.length)} from {list.length} data
           </p>
 
           <div className="flex gap-2">

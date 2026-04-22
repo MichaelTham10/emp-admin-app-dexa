@@ -30,7 +30,7 @@ export function EmpProfilePage() {
     },
     onSuccess: (data) => {
       console.log(data);
-      window.location.reload()
+      alert("Success check in");
     },
   })
 
@@ -41,7 +41,7 @@ export function EmpProfilePage() {
     },
     onSuccess: (data) => {
       console.log(data);
-      window.location.reload()
+      alert("Success check out");
     },
   })
 
