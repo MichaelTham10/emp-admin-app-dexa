@@ -22,7 +22,7 @@ export function LoginPage() {
         },
         onSuccess: (data) => {
             localStorage.setItem('token', data.accessToken)
-            navigate('/employee')
+            navigate('/admin')
         },
     })
 

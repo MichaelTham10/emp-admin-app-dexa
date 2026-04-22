@@ -10,7 +10,7 @@ import { ResponseCheckIn } from '../interfaces/Response/ResponseCheckIn'
 import { RequestCheckInOutForm } from '../interfaces/Request/RequestCheckInForm'
 import { ResponseCheckOut } from '../interfaces/Response/ResponseCheckOut'
 
-export function EmpProfilePage() {
+export const EmpProfilePage = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [isAttd, setIsAttd] = useState<boolean>(false);
   const token = localStorage.getItem('token')
@@ -176,7 +176,7 @@ export function EmpProfilePage() {
         </button>
 
       </div>
-      {isEditing && <EmpUpdateComponent empId={data!.EmpId}/>}
+      {isEditing && <EmpUpdateComponent />}
       {isAttd && <AttendanceSummaryComponent empNo={data!.EmpNo} />}
     </div>
   )
