@@ -36,7 +36,8 @@ export const EmpAddComponent = () => {
         },
         onSuccess: (data) => {
             console.log(data);
-            window.location.reload()
+            alert("Success adding employee");
+            window.location.reload();
         },
     })
 

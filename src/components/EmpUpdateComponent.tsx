@@ -33,7 +33,8 @@ export const EmpUpdateComponent = () => {
         },
         onSuccess: (data) => {
             console.log(data);
-            window.location.reload()
+            alert("Success updating employee");
+            window.location.reload();
         },
     })
 
