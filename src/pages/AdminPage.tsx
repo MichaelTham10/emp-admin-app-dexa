@@ -4,17 +4,30 @@ import { jwtDecode } from 'jwt-decode'
 import { TokenPayload } from '../interfaces/General/TokenPayload'
 import { ResponseEmpProfile } from '../interfaces/Response/ResponseEmpProfile'
 import { EmpUpdateComponent } from '../components/EmpUpdateComponent'
-import { useState } from 'react'
-import { AttendanceSummaryComponent } from '../components/AttendanceSummaryComponent'
+import { useEffect, useState } from 'react'
 import { EmpAddComponent } from '../components/EmpAddComponent'
 import { AttendanceAdminSummaryComponent } from '../components/AttendanceAdminSummaryComponent'
+import { io } from 'socket.io-client'
 
 export const AdminPage = () => {
     const [isEditing, setIsEditing] = useState<boolean>(false);
     const [isAttd, setIsAttd] = useState<boolean>(false);
     const [isAdd, setIsAdd] = useState<boolean>(false);
-    const token = localStorage.getItem('token')
-    const decoded = jwtDecode<TokenPayload>(token!)
+    const token = localStorage.getItem('token');
+    const decoded = jwtDecode<TokenPayload>(token!);
+
+    const socket = io(process.env.REACT_APP_EMPLOYEE_API);
+
+    useEffect(() => {
+        socket.on("employee_updated", (data) => {
+            alert(data.message);
+        });
+
+        return () => {
+            socket.off("employee_updated");
+        };
+    }, [socket]);
+
     const { data, isLoading, isError } = useQuery<ResponseEmpProfile>({
         queryKey: ['profile'],
         queryFn: async () => {
